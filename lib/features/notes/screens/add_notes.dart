@@ -125,129 +125,115 @@ class _AddNotesState extends State<AddNotes> {
         top: AppSize.lg,
       ),
       child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Drag handle
-            Center(
-              child: Container(
-                width: AppSize.xxxl + AppSize.sm,
-                height: AppSize.xs,
-                decoration: BoxDecoration(
-                  color: cs.onSurface.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(AppSize.xs / 2),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Drag handle
+              Center(
+                child: Container(
+                  width: AppSize.xxxl + AppSize.sm,
+                  height: AppSize.xs,
+                  decoration: BoxDecoration(
+                    color: cs.onSurface.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(AppSize.xs / 2),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: AppSize.lg),
-            // Sheet Header
-            Row(
-              children: [
-                Text(
-                  isEdit ? 'Edit Note' : 'Add Note',
-                  style: TextStyle(
-                    fontSize: AppText.displayMd,
-                    fontWeight: FontWeight.w600,
-                    color: cs.onSurface,
-                    letterSpacing: -0.4,
-                  ),
-                ),
-                const Spacer(),
-                // // Save button in header (quick access)
-                // FilledButton(
-                //   style: FilledButton.styleFrom(
-                //     minimumSize: Size.zero,
-                //     padding: const EdgeInsets.symmetric(
-                //       horizontal: AppSize.lg,
-                //       vertical: AppSize.sm,
-                //     ),
-                //   ),
-                //   onPressed: _save,
-                //   child: const Text('Save'),
-                // ),
-              ],
-            ),
-            const SizedBox(height: AppSize.lg),
-
-            // Content type selector
-            ContentTypeSelector(
-              selected: _contentType,
-              onChanged: _switchContentType,
-            ),
-            const SizedBox(height: AppSize.lg),
-
-            Form(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              key: _formKey,
-              child: Column(
+              const SizedBox(height: AppSize.lg),
+              // Sheet Header
+              Row(
                 children: [
-                  TextFormField(
-                    controller: _titleController,
-                    textCapitalization: TextCapitalization.sentences,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Title is required';
-                      }
-                      return null;
-                    },
+                  Text(
+                    isEdit ? 'Edit Note' : 'Add Note',
                     style: TextStyle(
-                      fontSize: AppText.titleLg,
+                      fontSize: AppText.displayMd,
                       fontWeight: FontWeight.w600,
                       color: cs.onSurface,
-                    ),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Title',
+                      letterSpacing: -0.4,
                     ),
                   ),
-                  const SizedBox(height: AppSize.md),
-                  // Content area
-                  if (_contentType == 'plain')
+                  const Spacer(),
+                ],
+              ),
+              const SizedBox(height: AppSize.lg),
+  
+              // Content type selector
+              ContentTypeSelector(
+                selected: _contentType,
+                onChanged: _switchContentType,
+              ),
+              const SizedBox(height: AppSize.lg),
+  
+              Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                key: _formKey,
+                child: Column(
+                  children: [
                     TextFormField(
-                      controller: _descController,
-                      maxLines: 5,
-                      minLines: 3,
+                      controller: _titleController,
                       textCapitalization: TextCapitalization.sentences,
-                      // validator: (v) => (v == null || v.trim().isEmpty)
-                      //     ? 'Content is required'
-                      //     : null,
-                      decoration: const InputDecoration(
-                        alignLabelWithHint: true,
-
-                        border: OutlineInputBorder(),
-                        labelText: 'Description',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Title is required';
+                        }
+                        return null;
+                      },
+                      style: TextStyle(
+                        fontSize: AppText.titleLg,
+                        fontWeight: FontWeight.w600,
+                        color: cs.onSurface,
                       ),
-                    )
-                  else
-                    ListItemsEditor(
-                      contentType: _contentType,
-                      controllers: _itemController,
-                      checkedStates: _checkedStates,
-                      onAdd: _addItem,
-                      onRemove: _removeItem,
-                      onCheckChanged: (i, val) => setState(() {
-                        _checkedStates[i] = val;
-                      }),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Title',
+                      ),
                     ),
-                  const SizedBox(height: AppSize.sm),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _save,
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(
-                          fontSize: AppText.titleLg,
-                          fontWeight: FontWeight.w600,
+                    const SizedBox(height: AppSize.md),
+                    // Content area
+                    if (_contentType == 'plain')
+                      TextFormField(
+                        controller: _descController,
+                        maxLines: 5,
+                        minLines: 3,
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: const InputDecoration(
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(),
+                          labelText: 'Description',
+                        ),
+                      )
+                    else
+                      ListItemsEditor(
+                        contentType: _contentType,
+                        controllers: _itemController,
+                        checkedStates: _checkedStates,
+                        onAdd: _addItem,
+                        onRemove: _removeItem,
+                        onCheckChanged: (i, val) => setState(() {
+                          _checkedStates[i] = val;
+                        }),
+                      ),
+                    const SizedBox(height: AppSize.sm),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: _save,
+                        child: const Text(
+                          'Save',
+                          style: TextStyle(
+                            fontSize: AppText.titleLg,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
