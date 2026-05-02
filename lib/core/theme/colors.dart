@@ -18,7 +18,6 @@ class AppColors {
   static const Color inputFillLight = Color(0xFFF5F5F5);
   static const Color inputFillDark = Color(0xFF1A1A1A);
 
-
   // Card Palette
   static const List<Color> cardColorsLight = [
     Color(0xFFFFB5B5), // coral rose

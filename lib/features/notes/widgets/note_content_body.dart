@@ -35,7 +35,9 @@ class NoteContentBody extends StatelessWidget {
               style: TextStyle(
                 height: 1.5,
                 decoration: note.checked[i] ? TextDecoration.lineThrough : null,
-                color: note.checked[i] ? cs.onSurface.withValues(alpha: 0.4) : null,
+                color: note.checked[i]
+                    ? cs.onSurface.withValues(alpha: 0.4)
+                    : null,
               ),
             ),
             value: note.checked.length > i ? note.checked[i] : false,
