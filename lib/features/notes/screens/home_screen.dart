@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: Column(
-            crossAxisAlignment: .start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: AppSize.sm),
               // Search + Sort Row
