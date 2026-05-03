@@ -18,6 +18,8 @@ This project is inspired by a clean, monochromatic mobile app design found on Dr
 
 ## App Preview
 
+![App Preview](images/App%20Preview.png)
+
 | | |
 | --- | --- |
 | ![Home Dark](images/HomeScreenDark.png) | ![Detail Dark](images/DetailScreenDark.png) |
