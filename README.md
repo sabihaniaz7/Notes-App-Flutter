@@ -10,11 +10,19 @@ This project is inspired by a clean, monochromatic mobile app design found on Dr
 
 - **Design Reference**: [Dribbble - Notes App](https://dribbble.com/shots/11875872-A-simple-and-lightweight-note-app)
 
+### Preview
+
+![Design Reference Preview](https://cdn.dribbble.com/users/2492450/screenshots/11875872/media/bcef4fe9fb85c454f9c474d175b2ff26.jpg)
+
 ---
 
-## Preview
+## App Preview
 
-![App Preview](https://cdn.dribbble.com/users/2492450/screenshots/11875872/media/bcef4fe9fb85c454f9c474d175b2ff26.jpg)
+| | |
+| --- | --- |
+| ![Home Dark](images/HomeScreenDark.png) | ![Detail Dark](images/DetailScreenDark.png) |
+| ![Home Light](images/HomeScreenLight.png) | ![Detail Light](images/DetailScreenLight.png) |
+| ![Add Note](images/AddNote.png) | ![Home Empty](images/HomeScreenEmpty.png) |
 
 ---
 
