@@ -163,7 +163,7 @@ class NotesCard extends StatelessWidget {
                   DateFormat('MMM dd, yyyy').format(note.date),
                   style: TextStyle(
                     fontSize: AppText.caption,
-                    color: cs.onSurface.withValues(alpha: 0.4),
+                    color: Colors.black.withValues(alpha: 0.4),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -181,9 +181,7 @@ class NotesCard extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(AppSize.xs + 2),
                     decoration: BoxDecoration(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.1)
-                          : Colors.black.withValues(alpha: 0.05),
+                      color: Colors.black.withValues(alpha: 0.05),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(

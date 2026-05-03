@@ -192,9 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           final note = notes[index];
                           // Pick a card color (cycle through palette)
 
-                          final cardColor = isDark
-                              ? AppColors.cardColorsDark
-                              : AppColors.cardColorsLight;
+                          final cardColor = AppColors.cardColorsLight;
                           final color = cardColor[index % cardColor.length];
                           return NotesCard(
                             note: note,
