@@ -158,14 +158,14 @@ class _AddNotesState extends State<AddNotes> {
                 ],
               ),
               const SizedBox(height: AppSize.lg),
-  
+
               // Content type selector
               ContentTypeSelector(
                 selected: _contentType,
                 onChanged: _switchContentType,
               ),
               const SizedBox(height: AppSize.lg),
-  
+
               Form(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: _formKey,
