@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.forward();
 
     // Hold for 2.8 s total then cross-fade to home
-    Future.delayed(const Duration(milliseconds: 2800), _navigateHome);
+    Future.delayed(const Duration(milliseconds: 1800), _navigateHome);
   }
 
   void _navigateHome() {
