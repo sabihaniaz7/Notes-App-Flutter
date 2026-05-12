@@ -20,7 +20,6 @@ class NotesCard extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
     final provider = context.watch<NotesProvider>();
     final onCard = isDark ? Colors.black : AppColors.textOnCardLight;
 
@@ -31,10 +30,7 @@ class NotesCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: cardColor,
           borderRadius: BorderRadius.circular(AppSize.cardRadius),
-          border: Border.all(
-            color: cs.onSurface.withValues(alpha: 0.08),
-            width: 1.0,
-          ),
+          border: Border.all(color: onCard.withValues(alpha: 0.08), width: 1.0),
         ),
         padding: const EdgeInsets.all(AppSize.md),
         child: Column(
@@ -60,16 +56,26 @@ class NotesCard extends StatelessWidget {
             ),
             if (note.contentType == 'plain' && note.description.isNotEmpty) ...[
               const SizedBox(height: AppSize.xs),
-              Text(
-                note.description,
-                style: TextStyle(
-                  fontSize: AppText.body - 1, // slightly larger than caption
-                  color: onCard,
-                  fontWeight: FontWeight.w500,
-                  height: 1.5,
+              ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.black, Colors.transparent],
+                    stops: [0.6, 1.0],
+                  ).createShader(bounds);
+                },
+                blendMode: BlendMode.dstIn,
+                child: Text(
+                  note.description,
+                  style: TextStyle(
+                    fontSize: AppText.body - 1, // slightly larger than caption
+                    color: onCard,
+                    fontWeight: FontWeight.w500,
+                    height: 1.5,
+                  ),
+                  maxLines: 4,
                 ),
-                maxLines: 6,
-                overflow: TextOverflow.ellipsis,
               ),
             ],
             // Content type badge (bullet/checkbox)
@@ -83,13 +89,13 @@ class NotesCard extends StatelessWidget {
                 final item = entry.value;
                 if (note.contentType == 'checkbox') {
                   return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: AppSize.xxl,
                         width: AppSize.xxl,
                         child: Checkbox(
                           checkColor: Colors.white,
-
                           value: note.checked[i],
                           activeColor: onCard,
                           side: BorderSide(color: onCard, width: 1.5),
@@ -108,12 +114,13 @@ class NotesCard extends StatelessWidget {
                             decoration: note.checked[i]
                                 ? TextDecoration.lineThrough
                                 : null,
+                            decorationColor: note.checked[i]
+                                ? onCard.withValues(alpha: 0.4)
+                                : onCard,
                             color: note.checked[i]
-                                ? cs.onSurface.withValues(alpha: 0.4)
+                                ? onCard.withValues(alpha: 0.4)
                                 : onCard,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -122,6 +129,7 @@ class NotesCard extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: AppSize.xs / 2),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           '• ',
@@ -138,8 +146,6 @@ class NotesCard extends StatelessWidget {
                               fontSize: AppText.caption,
                               color: onCard,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -149,20 +155,20 @@ class NotesCard extends StatelessWidget {
               }),
               if (note.items.length > 4)
                 Text(
-                  '...',
+                  ' + ${note.items.length - 4} more',
                   style: TextStyle(
-                    fontSize: AppText.caption,
-                    color: cs.onSurface.withValues(alpha: 0.5),
+                    fontSize: AppText.overline,
+                    fontWeight: FontWeight.w500,
+                    color: onCard.withValues(alpha: 0.7),
                   ),
                 ),
             ],
-            const SizedBox(height: AppSize.xs),
             Row(
               children: [
                 Text(
-                  DateFormat('MMM dd, yyyy').format(note.date),
+                  DateFormat('E, dd MMM yyy').format(note.date),
                   style: TextStyle(
-                    fontSize: AppText.caption,
+                    fontSize: AppText.overline + 1,
                     color: Colors.black.withValues(alpha: 0.4),
                     fontWeight: FontWeight.w600,
                   ),
