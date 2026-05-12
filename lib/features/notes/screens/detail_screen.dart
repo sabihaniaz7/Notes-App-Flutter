@@ -65,46 +65,46 @@ class DetailScreen extends StatelessWidget {
             // If note was deleted, we'll be popping the screen anyway
             return const SizedBox.shrink();
           }
-
-          return SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(
-              AppSize.xl,
-              AppSize.lg,
-              AppSize.xl,
-              AppSize.xxxl,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Hero(
-                  tag: currentNote.id,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: Text(
-                      currentNote.title,
-                      style: TextStyle(
-                        fontSize: AppText.displayLg,
-                        fontWeight: FontWeight.w600,
-                        color: cs.onSurface,
-                        height: 1.25,
-                        letterSpacing: -0.5,
+          return SelectionArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(
+                AppSize.xl,
+                AppSize.lg,
+                AppSize.xl,
+                AppSize.xxxl,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: currentNote.id,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Text(
+                        currentNote.title,
+                        style: TextStyle(
+                          fontSize: AppText.displayLg,
+                          fontWeight: FontWeight.w600,
+                          color: cs.onSurface,
+                          height: 1.25,
+                          letterSpacing: -0.5,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: AppSize.sm),
-                Text(
-                  DateFormat('MMM dd, yyyy').format(currentNote.date),
-                  style: TextStyle(
-                    fontSize: AppText.caption,
-                    color: cs.onSurface.withValues(alpha: 0.5),
-                    fontWeight: FontWeight.w500,
+                  const SizedBox(height: AppSize.sm),
+                  Text(
+                    DateFormat('E, dd MMM yyyy').format(currentNote.date),
+                    style: TextStyle(
+                      fontSize: AppText.caption,
+                      color: cs.onSurface.withValues(alpha: 0.5),
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                const SizedBox(height: AppSize.lg),
-
-                NoteContentBody(note: currentNote),
-              ],
+                  const SizedBox(height: AppSize.lg),
+                  NoteContentBody(note: currentNote),
+                ],
+              ),
             ),
           );
         },
