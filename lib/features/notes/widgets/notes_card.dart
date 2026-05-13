@@ -22,7 +22,6 @@ class NotesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<NotesProvider>();
     final onCard = isDark ? Colors.black : AppColors.textOnCardLight;
-
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -62,7 +61,7 @@ class NotesCard extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Colors.black, Colors.transparent],
-                    stops: [0.6, 1.0],
+                    stops: [0.9, 1.0],
                   ).createShader(bounds);
                 },
                 blendMode: BlendMode.dstIn,
@@ -83,7 +82,6 @@ class NotesCard extends StatelessWidget {
                 note.contentType != 'plain' &&
                 note.contentType.isNotEmpty) ...[
               const SizedBox(height: AppSize.sm),
-
               ...note.items.take(4).toList().asMap().entries.map((entry) {
                 final i = entry.key;
                 final item = entry.value;
@@ -92,16 +90,22 @@ class NotesCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: AppSize.xxl,
-                        width: AppSize.xxl,
-                        child: Checkbox(
-                          checkColor: Colors.white,
-                          value: note.checked[i],
-                          activeColor: onCard,
-                          side: BorderSide(color: onCard, width: 1.5),
-                          onChanged: (_) {
-                            provider.toggleCheck(note.id, i);
-                          },
+                        height: AppSize.xl,
+                        width: AppSize.xl,
+                        child: Transform.scale(
+                          scale: 0.9,
+                          child: Checkbox(
+                            checkColor: Colors.white,
+                            value: note.checked[i],
+                            activeColor: onCard,
+                            side: BorderSide(color: onCard, width: 1.5),
+                            visualDensity: VisualDensity.compact,
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
+                            onChanged: (_) {
+                              provider.toggleCheck(note.id, i);
+                            },
+                          ),
                         ),
                       ),
                       const SizedBox(width: AppSize.xs),
